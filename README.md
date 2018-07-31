@@ -53,3 +53,121 @@ pirateGreeting()// Who will greet us? Jack or Will?
 
 [Run the repl.it](https://repl.it/@kasperweb/PirateClosure)
 
+### Closures
+
+> A closure is the combination of a function and the lexical environment within which that function was declared. 
+
+The term 'closures' is not something only unique to Javascript. [Closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) are a record storing a function together with its environment.
+
+In Javascript, the environment consists of any local variables that were in-scope at the time the closure was created.
+
+#### Check - What is Lexical Environment?
+
+Everytime a function runs, a new lexical enviroment gets created. In JavaScript, every running function, code block, and the script as a whole have an associated object known as the Lexical Environment.
+
+The lexical environment consists of 2 parts:
+1. The Environment Record - object that contains of the local variables as its properties
+2. Reference to the outer lexical environment(think of a pointer) - which is typically right outside of the current set of `{}`
+
+#### Examples
+
+##### Data Privacy / Keeping State
+
+```javascript
+function makeTreasureCounter() {
+  let totalTreasure = 0;
+  return function() {
+    return ++totalTreasure;
+  }
+}
+
+let treasureCounter = makeTreasureCounter();
+
+console.log(treasureCounter.totalTreasure) // undefined
+console.log(treasureCounter()) // 1
+console.log(treasureCounter()) // 2
+```
+
+##### Function Factory
+
+```javascript
+function treasureMultiplier(multiplier){
+  return function(treasure) {
+    return multiplier * treasure;
+  }
+}
+
+let multiplyMeTreasure = treasureMultiplier(1);
+let multiplyMeTreasureBy5 = treasureMultiplier(5);
+
+console.log(multiplyMeTreasure(100));
+console.log(multiplyMeTreasureBy5(100));
+```
+[Play](https://repl.it/@kasperweb/FunctionFactory)
+
+#### Singleton / Module
+
+```
+pirateTracker = (function() {
+  let totalTreasure = 0
+  let pirateArray = []
+
+  //pirare = {name,treasure}
+  function addPirate(pirate) { 
+    totalTreasure += pirate.treasure;
+    pirateArray.push(pirate)
+  }
+
+  function getTreasure() {
+    return totalTreasure;
+  }
+
+  return {
+    addPirate, getTreasure
+  }
+})();
+
+pirateTracker.addPirate({name: 'will', treasure: 100})
+pirateTracker.addPirate({name: 'jack', treasure: 200})
+
+console.log(pirateTracker.totalTreasure) // undefined
+console.log(pirateTracker.getTreasure()) // 300
+```
+[Play](https://repl.it/@kasperweb/SingletonPirateTracker)
+
+### Your Turn
+
+1. Write function sum that works like this: subtract(a)(b) = a-b
+
+```javascript
+subtract(9)(5) = 4
+subtract(-3)(2) = -5
+```
+
+2.  We are making 2 treasure counters. Do they act independently? What will be logged to the console? 
+```javascript
+function makeTreasureCounter() {
+  let totalTreasure = 0;
+  return function() {
+    return ++totalTreasure;
+  }
+}
+
+let willsTreasureCounter = makeTreasureCounter();
+let jacksTreasureCounter = makeTreasureCounter();
+
+console.log(treasureCounter.totalTreasure) // undefined
+console.log(willsTreasureCounter())
+console.log(willsTreasureCounter())
+
+console.log(jacksTreasureCounter())
+console.log(jacksTreasureCounter())
+```
+[Try it out](https://repl.it/@kasperweb/MultipleTreasureCounters)
+
+### Further Readings
+
+[MDN Docs for Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+[Javascript.info)(https://javascript.info/closure)
+[Eric Elliott's Master the JS Interview: What is a closure?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36)
+
