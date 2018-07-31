@@ -107,7 +107,7 @@ console.log(multiplyMeTreasureBy5(100));
 
 #### Singleton / Module
 
-```
+```javascript
 pirateTracker = (function() {
   let totalTreasure = 0
   let pirateArray = []
@@ -167,7 +167,7 @@ console.log(jacksTreasureCounter())
 
 ### Further Readings
 
-[MDN Docs for Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
-[Javascript.info)(https://javascript.info/closure)
-[Eric Elliott's Master the JS Interview: What is a closure?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36)
+* [MDN Docs for Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+* [Javascript.info](https://javascript.info/closure)
+* [Eric Elliott's Master the JS Interview: What is a closure?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36)
 
